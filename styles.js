@@ -11,7 +11,17 @@ function createGrid(total) {
         container.appendChild(element);
         element.textContent = `${i+1}`;
         element.classList.add('box');
+        element.addEventListener('mouseover' , () => {
+            element.style.backgroundColor = 'black';
+            console.log(element)
+        })
     }
     container.style.setProperty(`grid-template-columns` , `repeat(${grid.columns} , 1fr)`);
 
 }
+
+/* Hover Functions */
+
+
+/* Trying to create a hover mouse function */
+
