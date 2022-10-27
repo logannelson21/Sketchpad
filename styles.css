@@ -1,0 +1,18 @@
+.box {
+    border: 1px solid black;
+    text-align: center;
+    background-color: white;
+}
+
+#container {
+    display: grid;
+    width: 100vw;
+    margin: auto;
+    /*gap: 1em;*/
+}
+
+.sqrchoice {
+    text-align: center;
+    margin-bottom: 10px;
+    
+}
