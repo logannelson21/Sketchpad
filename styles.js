@@ -1,37 +1,60 @@
 /* 16x16 divs */
-const container = document.querySelector('#container');
-const grid = {rows:16 , columns:16};
-const total = grid.rows * grid.columns;
+const containerDiv = document.querySelector('#containerDiv');
 
-createGrid(total);
 
-function createGrid(total) {
-    for( let i = 0; i < total; i++){
-        const element = document.createElement('div');
-        element.textContent = `${i+1}`;
-        element.style.width = '960px';
-        element.classList.add('box');
-        element.style.minHeight = '0';
-        element.style.minWidth = '0';
-        element.style.overflow = 'hidden';
-        container.appendChild(element);
+function createGrid(rows , columns) {
+
+    while(document.querySelector('button') !== null) {
+        document.querySelector('button').remove();
+    }
+    
+    containerDiv.style.setProperty('--grid-columns' , columns);
+    containerDiv.style.setProperty('--grid-rows' , rows);
+    containerDiv.style.width = '960px';
+    containerDiv.style.overflow = 'hidden';
+    for( let i = 0; i < (rows * columns); i++) {
+        const square = document.createElement('div');
+        square.style.minHeight = '0';
+        square.style.minWidth = '0';
+        square.style.overflow = 'hidden';
+        containerDiv.appendChild(square).className = 'grid-item';
         /* This function changes the square background color to black on a mouseover event */
-        element.addEventListener('mouseover' , () => {
-            element.style.backgroundColor = 'black';
-            console.log(element)
+        square.addEventListener('mouseover' , () => {
+            square.style.backgroundColor = 'black';
         })
     }
-    container.style.setProperty(`grid-template-columns` , `repeat(${grid.columns} , 1fr)`);
+
+    createButton();
 
 }
 
-createButton();
+
 
 function createButton() {
-    const buttonDiv = document.querySelector('.buttonDiv');
-    const reset = document.createElement('button');
-    reset.textContent = 'Reset Grid!';
-    buttonDiv.appendChild(reset);
+    const buttonDiv = document.querySelector('#buttonDiv');
+    const resetButton = document.createElement('button');
+    resetButton.textContent = 'Reset Grid!';
+    resetButton.style.margin = '20px';
+    buttonDiv.appendChild(resetButton);
+
+    resetButton.addEventListener('click' , () => {
+        document.querySelectorAll('.grid-item').forEach(e => e.remove());
+        let userInput = prompt('Please enter the number of squares for each side (Max: 100)');
+        if(userInput > 100 ) {
+            alert('You picked more than the max of 100....');
+            return;
+        }
+        rows = userInput;
+        columns = userInput;
+        createGrid(rows , columns);
+    })
+    
 }
+
+
+
+createGrid(16 , 16);
+
+
 
 
